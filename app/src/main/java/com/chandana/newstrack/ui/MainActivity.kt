@@ -1,4 +1,4 @@
-package com.chandana.newstrack
+package com.chandana.newstrack.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
