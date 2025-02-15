@@ -3,9 +3,12 @@ package com.chandana.newstrack.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.chandana.newstrack.data.repository.TopHeadlinePagingRepository
 import com.chandana.newstrack.data.repository.TopHeadlineSourcesRepository
 import com.chandana.newstrack.di.ActivityContext
 import com.chandana.newstrack.ui.base.ViewModelProviderFactory
+import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingAdapter
+import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingViewModel
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesAdapter
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineViewModel
 import com.chandana.newstrack.utils.DispatcherProvider
@@ -32,5 +35,20 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideTopHeadlinesPagingViewModel(
+        repository: TopHeadlinePagingRepository,
+        dispatcherProvider: DispatcherProvider
+    ): TopHeadlinesPagingViewModel {
+        return ViewModelProvider(
+            activity,
+            ViewModelProviderFactory(TopHeadlinesPagingViewModel::class) {
+                TopHeadlinesPagingViewModel(repository, dispatcherProvider)
+            })[TopHeadlinesPagingViewModel::class.java]
+    }
+
+    @Provides
     fun provideTopHeadlineSourcesAdapter() = TopHeadlineSourcesAdapter(ArrayList())
+
+    @Provides
+    fun provideTopHeadlinesPagingAdapter() = TopHeadlinesPagingAdapter()
 }
