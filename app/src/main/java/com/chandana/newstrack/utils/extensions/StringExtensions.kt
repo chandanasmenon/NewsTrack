@@ -10,11 +10,11 @@ fun String.capitalizeWords(): String {
 }
 
 /* Function to get the language name based on the code */
-fun getLanguageName(code: String): String {
+fun String.getLanguageName(code: String): String {
     return AppConstant.LANGUAGES.find { it.id == code }?.value ?: "Unknown"
 }
 
 /* Function to get the country name based on the code */
-fun getCountryName(code: String): String {
+fun String.getCountryName(code: String): String {
     return AppConstant.COUNTRIES.find { it.id == code }?.value ?: "Unknown"
 }

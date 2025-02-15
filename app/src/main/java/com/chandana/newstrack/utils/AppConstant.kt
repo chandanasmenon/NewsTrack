@@ -5,6 +5,8 @@ import com.chandana.newstrack.data.model.Code
 object AppConstant {
     const val API_KEY = "34f03cf8a221405aa17278a04e8e98a4"
     const val USER_AGENT = "abc"
+    const val INITIAL_PAGE = 1
+    const val PAGE_SIZE = 10
     val COUNTRIES = listOf(
         Code("ae", "United Arab Emirates"),
         Code("ar", "Argentina"),

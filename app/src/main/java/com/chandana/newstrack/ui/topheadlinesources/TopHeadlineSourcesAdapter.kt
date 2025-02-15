@@ -22,8 +22,8 @@ class TopHeadlineSourcesAdapter(private val headlinesList: ArrayList<ApiSource>)
             binding.sourceNameTV.text = source.name
             binding.sourceDescriptionTV.text = source.description
             binding.categoryTV.text = source.category.capitalizeWords()
-            binding.countryTV.text = getCountryName(source.country)
-            binding.languageTV.text = getLanguageName(source.language)
+            binding.countryTV.text = source.country.getCountryName(source.country)
+            binding.languageTV.text = source.language.getLanguageName(source.language)
             itemView.setOnClickListener {
                 itemClickListener(source)
             }
