@@ -1,19 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:background="@drawable/mainscreen_background_drawable"
+    tools:context=".ui.homescreen.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/homeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/home_text"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/dividerView"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeTV" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/topHeadlinesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/top_headlines_text"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/paginationTopHeadlinesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/pagination_topheadline_sources"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topHeadlinesButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/offlineTopHeadlinesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/offline_topheadlines_sources_text"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paginationTopHeadlinesButton" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/newsSourcesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/news_categories"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/offlineTopHeadlinesButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/countrySelectionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/country_selection_text"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/newsSourcesButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/languageSelectionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/language_selection_text"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countrySelectionButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/searchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:padding="10dp"
+            android:text="@string/search_text"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/languageSelectionButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

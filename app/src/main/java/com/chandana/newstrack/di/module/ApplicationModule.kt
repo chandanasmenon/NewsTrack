@@ -8,6 +8,8 @@ import com.chandana.newstrack.di.BaseUrl
 import com.chandana.newstrack.di.NetworkApiKey
 import com.chandana.newstrack.di.NetworkUserAgent
 import com.chandana.newstrack.utils.AppConstant
+import com.chandana.newstrack.utils.DefaultDispatcherProvider
+import com.chandana.newstrack.utils.DispatcherProvider
 import com.chandana.newstrack.utils.HeaderInterceptor
 import dagger.Module
 import dagger.Provides
@@ -48,6 +50,10 @@ class ApplicationModule(private val application: NewsApplication) {
         @NetworkUserAgent userAgent: String
     ): HeaderInterceptor =
         HeaderInterceptor(apiKey, userAgent)
+
+    @Provides
+    @Singleton
+    fun provideDispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
 
     @Provides
     @Singleton
