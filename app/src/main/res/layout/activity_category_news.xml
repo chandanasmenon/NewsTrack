@@ -2,29 +2,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/offlineTopHeadlinesLayout"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainscreen_background_drawable"
     android:padding="6dp"
-    tools:context=".ui.pagingtopheadlinesources.TopHeadlinesPagingActivity">
+    tools:context=".ui.categorynews.CategoryNewsActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/titleTV"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:fontFamily="sans-serif-black"
-        android:gravity="center_horizontal"
-        android:text="@string/pagination_topheadline_sources"
-        android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        android:textStyle="bold"
+        android:paddingTop="10dp"
+        android:text="@string/category_news"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPagingTopHeadlines"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -34,8 +34,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTV" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noDataDisplayTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:text="@string/category_news_empty_display_text"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
-        android:id="@+id/progressBarPagingTopHeadlines"
+        android:id="@+id/progressBar"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:visibility="gone"
@@ -45,7 +61,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/errorMsgPagingTopHeadlines"
+        android:id="@+id/errorMsgTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"

@@ -1,5 +1,6 @@
 package com.chandana.newstrack.data.remote
 
+import com.chandana.newstrack.data.model.CategoryNewsResponse
 import com.chandana.newstrack.data.model.TopHeadlineSources
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,4 +16,7 @@ interface NetworkService {
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): TopHeadlineSources
+
+    @GET("top-headlines/sources")
+    suspend fun getCategoryBasedNews(@Query("category") category: String): CategoryNewsResponse
 }

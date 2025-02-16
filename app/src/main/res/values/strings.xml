@@ -18,4 +18,7 @@
     <string name="category">Category : </string>
     <string name="country">Country : </string>
     <string name="language">Language : </string>
+    <string name="category_news_empty_display_text">Looks like there’s no news in this category right now. Check again later for more updates!</string>
+    <string name="category_news">Category News</string>
+    <string name="news_categories_headline">%s News</string>
 </resources>

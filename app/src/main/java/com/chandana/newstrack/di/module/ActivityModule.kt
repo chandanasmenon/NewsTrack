@@ -3,11 +3,14 @@ package com.chandana.newstrack.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.chandana.newstrack.data.repository.CategoryNewsRepository
 import com.chandana.newstrack.data.repository.OfflineTopHeadlinesRepository
 import com.chandana.newstrack.data.repository.TopHeadlinePagingRepository
 import com.chandana.newstrack.data.repository.TopHeadlineSourcesRepository
 import com.chandana.newstrack.di.ActivityContext
 import com.chandana.newstrack.ui.base.ViewModelProviderFactory
+import com.chandana.newstrack.ui.categorynews.CategoryNewsAdapter
+import com.chandana.newstrack.ui.categorynews.CategoryNewsViewModel
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesAdapter
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesViewModel
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingAdapter
@@ -68,6 +71,16 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideCategoryNewsViewModel(
+        repository: CategoryNewsRepository,
+        dispatcherProvider: DispatcherProvider
+    ): CategoryNewsViewModel {
+        return ViewModelProvider(activity, ViewModelProviderFactory(CategoryNewsViewModel::class) {
+            CategoryNewsViewModel(repository = repository, dispatcherProvider = dispatcherProvider)
+        })[CategoryNewsViewModel::class.java]
+    }
+
+    @Provides
     fun provideTopHeadlineSourcesAdapter() = TopHeadlineSourcesAdapter(ArrayList())
 
     @Provides
@@ -75,4 +88,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideOfflineTopHeadlinesAdapter() = OfflineTopHeadlinesAdapter(ArrayList())
+
+    @Provides
+    fun provideCategoryNewsAdapter() = CategoryNewsAdapter(ArrayList())
 }
