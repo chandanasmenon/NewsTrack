@@ -7,6 +7,7 @@ object AppConstant {
     const val USER_AGENT = "abc"
     const val INITIAL_PAGE = 1
     const val PAGE_SIZE = 10
+    const val CATEGORY = "CATEGORY"
     val COUNTRIES = listOf(
         Code("ae", "United Arab Emirates"),
         Code("ar", "Argentina"),
@@ -79,4 +80,6 @@ object AppConstant {
         Code("ud", "Urdu"),
         Code("zh", "Chinese")
     )
+    val CATEGORIES =
+        listOf("business", "entertainment", "general", "health", "science", "sports", "technology")
 }

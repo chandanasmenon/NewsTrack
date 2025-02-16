@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:gravity="center_horizontal"
-        android:text="@string/topheadline_sources"
+        android:text="@string/offline_topheadlines_sources_text"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold"
