@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.chandana.newstrack.databinding.ActivityMainBinding
+import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesActivity
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingActivity
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesActivity
 
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.offlineTopHeadlinesButton.setOnClickListener {
-
+            val intent = Intent(this, OfflineTopHeadlinesActivity::class.java)
+            startActivity(intent)
         }
         binding.newsSourcesButton.setOnClickListener {
 

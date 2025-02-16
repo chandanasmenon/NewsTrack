@@ -11,8 +11,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TopHeadlineViewModel(
+class TopHeadlineViewModel @Inject constructor(
     private val repository: TopHeadlineSourcesRepository,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
