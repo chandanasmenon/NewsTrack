@@ -31,6 +31,9 @@
         <activity
             android:name=".ui.pagingtopheadlinesources.TopHeadlinesPagingActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.offlinetopheadlines.OfflineTopHeadlinesActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

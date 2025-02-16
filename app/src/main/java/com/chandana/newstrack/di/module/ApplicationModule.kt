@@ -1,16 +1,23 @@
 package com.chandana.newstrack.di.module
 
 import android.content.Context
+import androidx.room.Room
 import com.chandana.newstrack.NewsApplication
+import com.chandana.newstrack.data.local.AppDatabase
+import com.chandana.newstrack.data.local.AppDatabaseService
+import com.chandana.newstrack.data.local.DatabaseService
 import com.chandana.newstrack.data.remote.NetworkService
 import com.chandana.newstrack.di.ApplicationContext
 import com.chandana.newstrack.di.BaseUrl
+import com.chandana.newstrack.di.DatabaseName
 import com.chandana.newstrack.di.NetworkApiKey
 import com.chandana.newstrack.di.NetworkUserAgent
 import com.chandana.newstrack.utils.AppConstant
 import com.chandana.newstrack.utils.DefaultDispatcherProvider
+import com.chandana.newstrack.utils.DefaultNetworkHelper
 import com.chandana.newstrack.utils.DispatcherProvider
 import com.chandana.newstrack.utils.HeaderInterceptor
+import com.chandana.newstrack.utils.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -57,6 +64,11 @@ class ApplicationModule(private val application: NewsApplication) {
 
     @Provides
     @Singleton
+    fun provideNetworkHelper(@ApplicationContext context: Context): NetworkHelper =
+        DefaultNetworkHelper(context)
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(headerInterceptor: HeaderInterceptor): OkHttpClient {
         return OkHttpClient().newBuilder()
             .addInterceptor(headerInterceptor)
@@ -76,6 +88,29 @@ class ApplicationModule(private val application: NewsApplication) {
             .addConverterFactory(gsonConverterFactory)
             .build()
             .create(NetworkService::class.java)
+    }
+
+    @DatabaseName
+    @Provides
+    fun provideDatabaseName(): String = "news-database"
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(
+        @ApplicationContext context: Context,
+        @DatabaseName databaseName: String
+    ): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            databaseName
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseService(appDatabase: AppDatabase): DatabaseService {
+        return AppDatabaseService(appDatabase)
     }
 
 }
