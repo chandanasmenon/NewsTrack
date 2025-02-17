@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.chandana.newstrack.databinding.ActivityMainBinding
 import com.chandana.newstrack.ui.categorynews.CategoryDisplayActivity
 import com.chandana.newstrack.ui.countrynews.CountryDisplayActivity
+import com.chandana.newstrack.ui.languagenews.LanguageDisplayActivity
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesActivity
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingActivity
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesActivity
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.languageSelectionButton.setOnClickListener {
-
+            val intent = Intent(this, LanguageDisplayActivity::class.java)
+            startActivity(intent)
         }
         binding.searchButton.setOnClickListener {
 
