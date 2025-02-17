@@ -1,4 +1,4 @@
-package com.chandana.newstrack.data.repository
+package com.chandana.newstrack.data.repository.topheadlinesources
 
 import com.chandana.newstrack.data.model.ApiSource
 import com.chandana.newstrack.data.remote.NetworkService

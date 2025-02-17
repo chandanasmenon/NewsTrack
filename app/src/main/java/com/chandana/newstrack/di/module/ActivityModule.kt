@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.chandana.newstrack.data.repository.CategoryNewsRepository
-import com.chandana.newstrack.data.repository.OfflineTopHeadlinesRepository
-import com.chandana.newstrack.data.repository.TopHeadlinePagingRepository
-import com.chandana.newstrack.data.repository.TopHeadlineSourcesRepository
+import com.chandana.newstrack.data.repository.CountryNewsRepository
+import com.chandana.newstrack.data.repository.topheadlinesources.OfflineTopHeadlinesRepository
+import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlinePagingRepository
+import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlineSourcesRepository
 import com.chandana.newstrack.di.ActivityContext
 import com.chandana.newstrack.ui.base.ViewModelProviderFactory
 import com.chandana.newstrack.ui.categorynews.CategoryNewsAdapter
 import com.chandana.newstrack.ui.categorynews.CategoryNewsViewModel
+import com.chandana.newstrack.ui.countrynews.CountryNewsAdapter
+import com.chandana.newstrack.ui.countrynews.CountryNewsViewModel
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesAdapter
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesViewModel
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingAdapter
@@ -81,6 +84,21 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideCountryNewsViewModel(
+        repository: CountryNewsRepository,
+        dispatcherProvider: DispatcherProvider
+    ): CountryNewsViewModel {
+        return ViewModelProvider(
+            activity, ViewModelProviderFactory(CountryNewsViewModel::class) {
+                CountryNewsViewModel(
+                    repository = repository,
+                    dispatcherProvider = dispatcherProvider
+                )
+            }
+        )[CountryNewsViewModel::class.java]
+    }
+
+    @Provides
     fun provideTopHeadlineSourcesAdapter() = TopHeadlineSourcesAdapter(ArrayList())
 
     @Provides
@@ -91,4 +109,8 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideCategoryNewsAdapter() = CategoryNewsAdapter(ArrayList())
+
+    @Provides
+    fun provideCountryNewsAdapter() = CountryNewsAdapter(ArrayList())
+
 }

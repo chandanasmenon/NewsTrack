@@ -3,7 +3,7 @@ package com.chandana.newstrack.ui.topheadlinesources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chandana.newstrack.data.model.ApiSource
-import com.chandana.newstrack.data.repository.TopHeadlineSourcesRepository
+import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlineSourcesRepository
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.DispatcherProvider
 import kotlinx.coroutines.flow.MutableStateFlow

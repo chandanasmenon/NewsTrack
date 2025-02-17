@@ -2,7 +2,7 @@ package com.chandana.newstrack.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CategoryNewsResponse(
+data class NewsSourcesResponse(
     @SerializedName("sources")
     val sources: List<ApiSource>,
     @SerializedName("status")

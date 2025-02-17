@@ -1,4 +1,4 @@
-package com.chandana.newstrack.data.repository
+package com.chandana.newstrack.data.repository.topheadlinesources
 
 import com.chandana.newstrack.data.local.DatabaseService
 import com.chandana.newstrack.data.local.entity.Source

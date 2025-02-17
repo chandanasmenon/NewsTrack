@@ -3,7 +3,7 @@ package com.chandana.newstrack.ui.offlinetopheadlines
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chandana.newstrack.data.local.entity.Source
-import com.chandana.newstrack.data.repository.OfflineTopHeadlinesRepository
+import com.chandana.newstrack.data.repository.topheadlinesources.OfflineTopHeadlinesRepository
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.DispatcherProvider
 import com.chandana.newstrack.utils.NetworkHelper
