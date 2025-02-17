@@ -24,4 +24,7 @@
     <string name="country_news">Country News</string>
     <string name="country_news_empty_display_text">No current news for this country. Come back for more updates!</string>
     <string name="news_countries_headline">%s News Update</string>
+    <string name="news_languages_headline">Latest News in %s</string>
+    <string name="language_news_empty_display_text">No news available in %s at the moment. Please check back later!</string>
+    <string name="dummy_languages_news_headline">Latest News in English</string>
 </resources>

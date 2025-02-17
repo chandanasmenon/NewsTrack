@@ -9,6 +9,7 @@ object AppConstant {
     const val PAGE_SIZE = 10
     const val CATEGORY = "CATEGORY"
     const val COUNTRY = "COUNTRY"
+    const val LANGUAGE = "LANGUAGE"
     const val CODE = "CODE"
     val COUNTRIES = listOf(
         Code("ae", "United Arab Emirates"),

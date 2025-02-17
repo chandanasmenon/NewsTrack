@@ -6,6 +6,8 @@ import com.chandana.newstrack.ui.categorynews.CategoryDisplayActivity
 import com.chandana.newstrack.ui.categorynews.CategoryNewsActivity
 import com.chandana.newstrack.ui.countrynews.CountryDisplayActivity
 import com.chandana.newstrack.ui.countrynews.CountryNewsActivity
+import com.chandana.newstrack.ui.languagenews.LanguageDisplayActivity
+import com.chandana.newstrack.ui.languagenews.LanguageNewsActivity
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesActivity
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingActivity
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesActivity
@@ -21,4 +23,6 @@ interface ActivityComponent {
     fun inject(activity: CategoryDisplayActivity)
     fun inject(activity: CountryDisplayActivity)
     fun inject(activity: CountryNewsActivity)
+    fun inject(activity: LanguageNewsActivity)
+    fun inject(activity: LanguageDisplayActivity)
 }

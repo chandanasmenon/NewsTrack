@@ -46,6 +46,12 @@
         <activity
             android:name=".ui.countrynews.CountryDisplayActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.languagenews.LanguageNewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.languagenews.LanguageDisplayActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.chandana.newstrack.data.repository.CategoryNewsRepository
 import com.chandana.newstrack.data.repository.CountryNewsRepository
+import com.chandana.newstrack.data.repository.LanguageNewsRepository
 import com.chandana.newstrack.data.repository.topheadlinesources.OfflineTopHeadlinesRepository
 import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlinePagingRepository
 import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlineSourcesRepository
@@ -14,6 +15,8 @@ import com.chandana.newstrack.ui.categorynews.CategoryNewsAdapter
 import com.chandana.newstrack.ui.categorynews.CategoryNewsViewModel
 import com.chandana.newstrack.ui.countrynews.CountryNewsAdapter
 import com.chandana.newstrack.ui.countrynews.CountryNewsViewModel
+import com.chandana.newstrack.ui.languagenews.LanguageNewsAdapter
+import com.chandana.newstrack.ui.languagenews.LanguageNewsViewModel
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesAdapter
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesViewModel
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingAdapter
@@ -99,6 +102,16 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideLanguageNewsViewModel(
+        repository: LanguageNewsRepository,
+        dispatcherProvider: DispatcherProvider
+    ): LanguageNewsViewModel {
+        return ViewModelProvider(activity, ViewModelProviderFactory(LanguageNewsViewModel::class) {
+            LanguageNewsViewModel(repository = repository, dispatcherProvider = dispatcherProvider)
+        })[LanguageNewsViewModel::class.java]
+    }
+
+    @Provides
     fun provideTopHeadlineSourcesAdapter() = TopHeadlineSourcesAdapter(ArrayList())
 
     @Provides
@@ -112,5 +125,8 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideCountryNewsAdapter() = CountryNewsAdapter(ArrayList())
+
+    @Provides
+    fun provideLanguageNewsAdapter() = LanguageNewsAdapter(ArrayList())
 
 }
