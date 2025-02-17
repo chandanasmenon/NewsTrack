@@ -7,10 +7,13 @@ object AppConstant {
     const val USER_AGENT = "abc"
     const val INITIAL_PAGE = 1
     const val PAGE_SIZE = 10
+    var DEBOUNCE_TIMEOUT = 300L
+    const val MIN_SEARCH_CHAR = 3
     const val CATEGORY = "CATEGORY"
     const val COUNTRY = "COUNTRY"
     const val LANGUAGE = "LANGUAGE"
     const val CODE = "CODE"
+    val FILTERS = listOf("Language", "Sort By")
     val COUNTRIES = listOf(
         Code("ae", "United Arab Emirates"),
         Code("ar", "Argentina"),

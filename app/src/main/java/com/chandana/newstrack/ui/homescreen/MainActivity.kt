@@ -9,6 +9,7 @@ import com.chandana.newstrack.ui.countrynews.CountryDisplayActivity
 import com.chandana.newstrack.ui.languagenews.LanguageDisplayActivity
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesActivity
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingActivity
+import com.chandana.newstrack.ui.searchnews.SearchActivity
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesActivity
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.searchButton.setOnClickListener {
-
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
         }
     }
 }

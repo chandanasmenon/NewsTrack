@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.chandana.newstrack.data.repository.CategoryNewsRepository
 import com.chandana.newstrack.data.repository.CountryNewsRepository
 import com.chandana.newstrack.data.repository.LanguageNewsRepository
+import com.chandana.newstrack.data.repository.SearchRepository
 import com.chandana.newstrack.data.repository.topheadlinesources.OfflineTopHeadlinesRepository
 import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlinePagingRepository
 import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlineSourcesRepository
@@ -21,6 +22,9 @@ import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesAdapter
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlinesViewModel
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingAdapter
 import com.chandana.newstrack.ui.pagingtopheadlinesources.TopHeadlinesPagingViewModel
+import com.chandana.newstrack.ui.searchnews.FilterDataAdapter
+import com.chandana.newstrack.ui.searchnews.SearchNewsAdapter
+import com.chandana.newstrack.ui.searchnews.SearchNewsViewModel
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesAdapter
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineViewModel
 import com.chandana.newstrack.utils.DispatcherProvider
@@ -112,6 +116,16 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideSearchNewsViewModel(
+        repository: SearchRepository,
+        dispatcherProvider: DispatcherProvider
+    ): SearchNewsViewModel {
+        return ViewModelProvider(activity, ViewModelProviderFactory(SearchNewsViewModel::class) {
+            SearchNewsViewModel(repository = repository, dispatcherProvider = dispatcherProvider)
+        })[SearchNewsViewModel::class.java]
+    }
+
+    @Provides
     fun provideTopHeadlineSourcesAdapter() = TopHeadlineSourcesAdapter(ArrayList())
 
     @Provides
@@ -128,5 +142,11 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideLanguageNewsAdapter() = LanguageNewsAdapter(ArrayList())
+
+    @Provides
+    fun provideFilterDataAdapter() = FilterDataAdapter(ArrayList())
+
+    @Provides
+    fun provideSearchNewsAdapter() = SearchNewsAdapter(ArrayList())
 
 }
