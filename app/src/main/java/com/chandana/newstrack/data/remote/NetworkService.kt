@@ -1,6 +1,7 @@
 package com.chandana.newstrack.data.remote
 
 import com.chandana.newstrack.data.model.NewsSourcesResponse
+import com.chandana.newstrack.data.model.SearchResponse
 import com.chandana.newstrack.data.model.TopHeadlineSources
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,4 +26,16 @@ interface NetworkService {
 
     @GET("top-headlines/sources")
     suspend fun getLanguageBasedNews(@Query("language") language: String): NewsSourcesResponse
+
+    @GET("everything")
+    suspend fun getSearchResults(
+        @Query("q") query: String
+    ): SearchResponse
+
+    @GET("everything")
+    suspend fun getFilterSearchResults(
+        @Query("q") q: String,
+        @Query("language") language: String,
+        @Query("sortBy") sortBy: String
+    ): SearchResponse
 }
