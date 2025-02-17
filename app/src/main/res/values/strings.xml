@@ -21,4 +21,7 @@
     <string name="category_news_empty_display_text">Looks like there’s no news in this category right now. Check again later for more updates!</string>
     <string name="category_news">Category News</string>
     <string name="news_categories_headline">%s News</string>
+    <string name="country_news">Country News</string>
+    <string name="country_news_empty_display_text">No current news for this country. Come back for more updates!</string>
+    <string name="news_countries_headline">%s News Update</string>
 </resources>

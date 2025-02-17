@@ -40,6 +40,12 @@
         <activity
             android:name=".ui.categorynews.CategoryNewsActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.countrynews.CountryNewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.countrynews.CountryDisplayActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ object AppConstant {
     const val INITIAL_PAGE = 1
     const val PAGE_SIZE = 10
     const val CATEGORY = "CATEGORY"
+    const val COUNTRY = "COUNTRY"
+    const val CODE = "CODE"
     val COUNTRIES = listOf(
         Code("ae", "United Arab Emirates"),
         Code("ar", "Argentina"),

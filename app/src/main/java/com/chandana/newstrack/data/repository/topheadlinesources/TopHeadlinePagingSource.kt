@@ -1,4 +1,4 @@
-package com.chandana.newstrack.data.repository
+package com.chandana.newstrack.data.repository.topheadlinesources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

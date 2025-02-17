@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.chandana.newstrack.data.model.ApiSource
-import com.chandana.newstrack.data.repository.TopHeadlinePagingRepository
+import com.chandana.newstrack.data.repository.topheadlinesources.TopHeadlinePagingRepository
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.DispatcherProvider
 import kotlinx.coroutines.flow.MutableStateFlow
