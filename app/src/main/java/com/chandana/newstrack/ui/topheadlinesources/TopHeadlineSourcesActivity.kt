@@ -46,7 +46,7 @@ class TopHeadlineSourcesActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUiState(uiState: UiState<List<ApiSource>>) {
+    fun setUiState(uiState: UiState<List<ApiSource>>) {
         when (uiState) {
             is UiState.Loading -> {
                 binding.progressBarTopHeadlineSources.visibility = View.VISIBLE
