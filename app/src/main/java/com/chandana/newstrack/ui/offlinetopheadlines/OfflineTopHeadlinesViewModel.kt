@@ -45,7 +45,7 @@ class OfflineTopHeadlinesViewModel @Inject constructor(
         }
     }
 
-    private fun fetchSourcesDirectlyFromDB() {
+    fun fetchSourcesDirectlyFromDB() {
         viewModelScope.launch(dispatcherProvider.main) {
             offlineTopHeadlinesRepository.getSourcesDirectlyFromDB()
                 .flowOn(dispatcherProvider.io)
