@@ -4,25 +4,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chandana.newstrack.NewsApplication
 import com.chandana.newstrack.databinding.ActivityPagingTopheadlinesBinding
-import com.chandana.newstrack.di.component.DaggerActivityComponent
-import com.chandana.newstrack.di.module.ActivityModule
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.ui.base.UiState.Success
 import com.chandana.newstrack.utils.extensions.displayErrorMessage
 import com.chandana.newstrack.utils.extensions.launchCustomTab
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TopHeadlinesPagingActivity : AppCompatActivity() {
 
-    @Inject
     lateinit var viewModel: TopHeadlinesPagingViewModel
 
     @Inject
@@ -34,7 +33,7 @@ class TopHeadlinesPagingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPagingTopheadlinesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        injectDependencies()
+        viewModel = ViewModelProvider(this)[TopHeadlinesPagingViewModel::class.java]
         setupUI()
         lifecycleScope.launch {
             setupObserver()
@@ -79,12 +78,6 @@ class TopHeadlinesPagingActivity : AppCompatActivity() {
         adapter.itemClickListener = {
             launchCustomTab(it.url)
         }
-    }
-
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
     }
 
 }

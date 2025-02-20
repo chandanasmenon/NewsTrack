@@ -2,12 +2,10 @@ package com.chandana.newstrack.di.module
 
 import android.content.Context
 import androidx.room.Room
-import com.chandana.newstrack.NewsApplication
 import com.chandana.newstrack.data.local.AppDatabase
 import com.chandana.newstrack.data.local.AppDatabaseService
 import com.chandana.newstrack.data.local.DatabaseService
 import com.chandana.newstrack.data.remote.NetworkService
-import com.chandana.newstrack.di.ApplicationContext
 import com.chandana.newstrack.di.BaseUrl
 import com.chandana.newstrack.di.DatabaseName
 import com.chandana.newstrack.di.NetworkApiKey
@@ -20,19 +18,17 @@ import com.chandana.newstrack.utils.HeaderInterceptor
 import com.chandana.newstrack.utils.NetworkHelper
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val application: NewsApplication) {
-
-    @ApplicationContext
-    @Provides
-    fun provideContext(): Context {
-        return application
-    }
+@InstallIn(SingletonComponent::class)
+class ApplicationModule {
 
     @BaseUrl
     @Provides

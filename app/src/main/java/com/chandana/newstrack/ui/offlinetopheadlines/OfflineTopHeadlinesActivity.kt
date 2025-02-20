@@ -4,35 +4,34 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chandana.newstrack.NewsApplication
 import com.chandana.newstrack.data.local.entity.Source
 import com.chandana.newstrack.databinding.ActivityOfflineTopHeadlinesBinding
-import com.chandana.newstrack.di.component.DaggerActivityComponent
-import com.chandana.newstrack.di.module.ActivityModule
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.extensions.displayErrorMessage
 import com.chandana.newstrack.utils.extensions.launchCustomTab
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class OfflineTopHeadlinesActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter: OfflineTopHeadlinesAdapter
 
-    @Inject
-    lateinit var viewModel: OfflineTopHeadlinesViewModel
+    private lateinit var viewModel: OfflineTopHeadlinesViewModel
 
     private lateinit var binding: ActivityOfflineTopHeadlinesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOfflineTopHeadlinesBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[OfflineTopHeadlinesViewModel::class.java]
         setContentView(binding.root)
-        injectDependencies()
         setupUI()
         lifecycleScope.launch {
             setupObserver()
@@ -84,9 +83,4 @@ class OfflineTopHeadlinesActivity : AppCompatActivity() {
         adapter.addData(data)
     }
 
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
-    }
 }

@@ -6,29 +6,28 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chandana.newstrack.NewsApplication
 import com.chandana.newstrack.R
 import com.chandana.newstrack.data.model.ApiSource
 import com.chandana.newstrack.databinding.ActivityCategoryNewsBinding
-import com.chandana.newstrack.di.component.DaggerActivityComponent
-import com.chandana.newstrack.di.module.ActivityModule
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.AppConstant.CATEGORY
 import com.chandana.newstrack.utils.extensions.capitalizeWords
 import com.chandana.newstrack.utils.extensions.displayErrorMessage
 import com.chandana.newstrack.utils.extensions.launchCustomTab
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CategoryNewsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoryNewsBinding
 
-    @Inject
-    lateinit var viewModel: CategoryNewsViewModel
+    private lateinit var viewModel: CategoryNewsViewModel
 
     @Inject
     lateinit var adapter: CategoryNewsAdapter
@@ -46,12 +45,12 @@ class CategoryNewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[CategoryNewsViewModel::class.java]
         val categoryValue = intent.getStringExtra(CATEGORY) ?: ""
         binding.titleTV.text = getString(
             R.string.news_categories_headline,
             categoryValue.capitalizeWords()
         )
-        injectDependencies()
         setUpRecyclerView()
         lifecycleScope.launch {
             setUpObserver(categoryValue)
@@ -109,9 +108,4 @@ class CategoryNewsActivity : AppCompatActivity() {
         }
     }
 
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
-    }
 }
