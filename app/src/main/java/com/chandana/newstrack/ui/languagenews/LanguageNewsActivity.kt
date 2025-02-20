@@ -6,28 +6,28 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chandana.newstrack.NewsApplication
 import com.chandana.newstrack.R
 import com.chandana.newstrack.data.model.ApiSource
 import com.chandana.newstrack.data.model.Code
 import com.chandana.newstrack.databinding.ActivityLanguageNewsBinding
-import com.chandana.newstrack.di.component.DaggerActivityComponent
-import com.chandana.newstrack.di.module.ActivityModule
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.AppConstant
 import com.chandana.newstrack.utils.extensions.capitalizeWords
 import com.chandana.newstrack.utils.extensions.displayErrorMessage
 import com.chandana.newstrack.utils.extensions.launchCustomTab
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LanguageNewsActivity : AppCompatActivity() {
-    @Inject
-    lateinit var viewModel: LanguageNewsViewModel
+
+    private lateinit var viewModel: LanguageNewsViewModel
 
     @Inject
     lateinit var adapter: LanguageNewsAdapter
@@ -47,6 +47,7 @@ class LanguageNewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLanguageNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[LanguageNewsViewModel::class.java]
         val languageValue = intent.getStringExtra(AppConstant.LANGUAGE)
         val languageCode = intent.getStringExtra(AppConstant.CODE)
         if (languageValue != null) {
@@ -55,7 +56,6 @@ class LanguageNewsActivity : AppCompatActivity() {
                 languageValue.capitalizeWords()
             )
         }
-        injectDependencies()
         setUpRecyclerView()
         lifecycleScope.launch {
             if (languageValue != null && languageCode != null) {
@@ -118,9 +118,4 @@ class LanguageNewsActivity : AppCompatActivity() {
         }
     }
 
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
-    }
 }

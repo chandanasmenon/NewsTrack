@@ -4,24 +4,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chandana.newstrack.NewsApplication
 import com.chandana.newstrack.data.model.ApiSource
 import com.chandana.newstrack.databinding.ActivityTopHeadLineSourcesBinding
-import com.chandana.newstrack.di.component.DaggerActivityComponent
-import com.chandana.newstrack.di.module.ActivityModule
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.extensions.displayErrorMessage
 import com.chandana.newstrack.utils.extensions.launchCustomTab
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TopHeadlineSourcesActivity : AppCompatActivity() {
-    @Inject
-    lateinit var viewModel: TopHeadlineViewModel
+
+    private lateinit var viewModel: TopHeadlineViewModel
 
     @Inject
     lateinit var adapter: TopHeadlineSourcesAdapter
@@ -31,7 +31,7 @@ class TopHeadlineSourcesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadLineSourcesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        injectDependencies()
+        viewModel = ViewModelProvider(this)[TopHeadlineViewModel::class.java]
         setupUI()
         lifecycleScope.launch {
             setupObserver()
@@ -85,12 +85,6 @@ class TopHeadlineSourcesActivity : AppCompatActivity() {
     private fun setupRecyclerData(data: List<ApiSource>) {
         adapter.clearData()
         adapter.addData(data)
-    }
-
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .applicationComponent((application as NewsApplication).applicationComponent)
-            .activityModule(ActivityModule(this)).build().inject(this)
     }
 
 }

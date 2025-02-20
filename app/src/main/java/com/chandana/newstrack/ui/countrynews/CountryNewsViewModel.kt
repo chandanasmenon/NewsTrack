@@ -7,6 +7,7 @@ import com.chandana.newstrack.data.model.Code
 import com.chandana.newstrack.data.repository.CountryNewsRepository
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.DispatcherProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class CountryNewsViewModel @Inject constructor(
     private val repository: CountryNewsRepository,
     private val dispatcherProvider: DispatcherProvider

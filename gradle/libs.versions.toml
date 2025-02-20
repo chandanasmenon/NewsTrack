@@ -6,7 +6,7 @@ constraintlayout = "2.1.4"
 converterGson = "2.9.0"
 coreKtx = "1.9.0"
 coreTesting = "2.1.0"
-dagger = "2.42"
+hiltAndroid = "2.44"
 espressoCore = "3.6.1"
 extensions = "1.1.1"
 glide = "4.11.0"
@@ -40,8 +40,8 @@ androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 jetbrains-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTestVersion" }
 lifecycle-extensions = { module = "android.arch.lifecycle:extensions", version.ref = "extensions" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
