@@ -2,9 +2,15 @@ package com.chandana.newstrack.ui.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.chandana.newstrack.R
+import com.chandana.newstrack.ui.categorynews.CategoryNewsRoute
+import com.chandana.newstrack.ui.categorynews.CategoryScreenRoute
 import com.chandana.newstrack.ui.homescreen.HomeScreenRoute
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlineRoute
 import com.chandana.newstrack.ui.pagingtopheadlinesources.PaginationTopHeadlineRoute
@@ -16,6 +22,8 @@ sealed class Route(val name: String) {
     object TopHeadlineSources : Route("topheadlinesources")
     object PaginationTopHeadlineSources : Route("paginationtopheadlinesources")
     object OfflineTopHeadlineSources : Route("offlinetopheadlinesources")
+    object NewsCategories : Route("newscategories")
+    object CategoryBasedNews : Route("categorybasednews/{category}")
 }
 
 @Composable
@@ -34,6 +42,7 @@ fun NewsNavHost() {
                     "topheadline" -> navController.navigate(Route.TopHeadlineSources.name)
                     "paginationtopheadline" -> navController.navigate(Route.PaginationTopHeadlineSources.name)
                     "offlinetopheadline" -> navController.navigate(Route.OfflineTopHeadlineSources.name)
+                    "newscategories" -> navController.navigate(Route.NewsCategories.name)
                 }
             }
             )
@@ -62,6 +71,32 @@ fun NewsNavHost() {
                 context.launchCustomTab(it)
             })
         }
+
+        composable(route = Route.NewsCategories.name) {
+            CategoryScreenRoute(onCategory = { category ->
+                navController.navigate("categorybasednews/$category")
+            }, onNavigate = {
+                navController.popBackStack()
+            })
+        }
+
+        composable(
+            route = Route.CategoryBasedNews.name, arguments = listOf(
+                navArgument(context.getString(R.string.category_text)) {
+                    type = NavType.StringType
+                })
+        ) { backStackEntry ->
+            val category =
+                backStackEntry.arguments?.getString(stringResource(R.string.category_text))
+            if (category != null) {
+                CategoryNewsRoute(category, onNewsClick = {
+                    context.launchCustomTab(it)
+                }, onNavigate = {
+                    navController.popBackStack()
+                })
+            }
+        }
+
     }
 
 }
