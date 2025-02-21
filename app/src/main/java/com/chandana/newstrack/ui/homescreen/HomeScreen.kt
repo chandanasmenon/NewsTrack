@@ -66,7 +66,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
     ) {
         TopHeadlines(onNavigate)
         PaginationTopHeadlines(onNavigate)
-        OfflineTopHeadlines()
+        OfflineTopHeadlines(onNavigate)
         NewsCategories()
         CountrySelection()
         LanguageSelection()
@@ -101,12 +101,12 @@ fun PaginationTopHeadlines(onNavigate: (String) -> Unit) {
 }
 
 @Composable
-fun OfflineTopHeadlines() {
+fun OfflineTopHeadlines(onNavigate: (String) -> Unit) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp),
         onClick = {
-
+            onNavigate("offlinetopheadline")
         }
     ) {
         ButtonText(text = stringResource(R.string.offline_topheadlines_sources_text))
