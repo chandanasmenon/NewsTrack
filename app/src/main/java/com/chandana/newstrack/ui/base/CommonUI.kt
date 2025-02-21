@@ -165,6 +165,25 @@ fun CountryDisplay(country: String) {
     }
 }
 
+@Composable
+fun NoCategoryNewsFoundMsg(category: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(MaterialTheme.colorScheme.errorContainer),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.category_news_empty_display_text, category),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onErrorContainer,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(4.dp)
+        )
+    }
+}
 
 
 
