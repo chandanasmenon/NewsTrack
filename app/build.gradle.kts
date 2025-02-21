@@ -37,45 +37,58 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
 dependencies {
+    // Core & AndroidX Dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-    // Constraint Layout
-    implementation(libs.androidx.constraintlayout)
-
-    // RecyclerView
-    implementation(libs.androidx.recyclerview)
-
-    // Glide
-    implementation(libs.glide)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit2.converter.gson)
-
-    implementation(libs.lifecycle.extensions)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    //Dagger-hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
     implementation(libs.androidx.browser)
     implementation(libs.androidx.activity)
 
-    // Room
+    // Compose core
+    implementation(libs.androidx.activity.compose)
+    implementation(platform("androidx.compose:compose-bom:2025.02.00"))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+
+    // Material Design
+    implementation(libs.androidx.material3.android)
+
+    // Paging with Compose
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.compose.android)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // Navigation & ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    // Hilt with Compose
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Retrofit for Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson)
+
+    // Dagger-Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    // Room for Local Storage
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
 
-    // Paging Library
-    implementation(libs.androidx.paging.runtime.ktx)
+    // Additional UI Features
+    implementation(libs.accompanist.flowlayout)
 
     // Unit Testing
     testImplementation(libs.junit)
@@ -84,9 +97,15 @@ dependencies {
     testImplementation(libs.jetbrains.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
 
-    // UI Testing
+    // Android Instrumented Tests
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.jetbrains.kotlinx.coroutines.test)
+    androidTestImplementation(platform("androidx.compose:compose-bom:2025.02.00"))
+    androidTestImplementation(libs.ui.test.junit4)
+
+    // Debug Dependencies
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
+

@@ -25,36 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.topheadlinesources.TopHeadlineSourcesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.pagingtopheadlinesources.TopHeadlinesPagingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.offlinetopheadlines.OfflineTopHeadlinesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.categorynews.CategoryDisplayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.categorynews.CategoryNewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.countrynews.CountryNewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.countrynews.CountryDisplayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.languagenews.LanguageNewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.languagenews.LanguageDisplayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.searchnews.SearchActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
