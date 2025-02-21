@@ -65,7 +65,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TopHeadlines(onNavigate)
-        PaginationTopHeadlines()
+        PaginationTopHeadlines(onNavigate)
         OfflineTopHeadlines()
         NewsCategories()
         CountrySelection()
@@ -88,12 +88,12 @@ fun TopHeadlines(onNavigate: (String) -> Unit) {
 }
 
 @Composable
-fun PaginationTopHeadlines() {
+fun PaginationTopHeadlines(onNavigate: (String) -> Unit) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp),
         onClick = {
-
+            onNavigate("paginationtopheadline")
         }
     ) {
         ButtonText(text = stringResource(R.string.pagination_topheadline_sources))

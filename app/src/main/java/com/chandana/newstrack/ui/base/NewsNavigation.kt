@@ -6,12 +6,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.chandana.newstrack.ui.homescreen.HomeScreenRoute
+import com.chandana.newstrack.ui.pagingtopheadlinesources.PaginationTopHeadlineRoute
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesRoute
 import com.chandana.newstrack.utils.extensions.launchCustomTab
 
 sealed class Route(val name: String) {
     object HomeScreen : Route("homescreen")
     object TopHeadlineSources : Route("topheadlinesources")
+    object PaginationTopHeadlineSources : Route("paginationtopheadlinesources")
 }
 
 @Composable
@@ -28,6 +30,7 @@ fun NewsNavHost() {
             HomeScreenRoute(onNavigate = { route ->
                 when (route) {
                     "topheadline" -> navController.navigate(Route.TopHeadlineSources.name)
+                    "paginationtopheadline" -> navController.navigate(Route.PaginationTopHeadlineSources.name)
                 }
             }
             )
@@ -35,6 +38,14 @@ fun NewsNavHost() {
 
         composable(route = Route.TopHeadlineSources.name) {
             TopHeadlineSourcesRoute(onNavigate = {
+                navController.popBackStack()
+            }, onNewsClick = {
+                context.launchCustomTab(it)
+            })
+        }
+
+        composable(route = Route.PaginationTopHeadlineSources.name) {
+            PaginationTopHeadlineRoute(onNavigate = {
                 navController.popBackStack()
             }, onNewsClick = {
                 context.launchCustomTab(it)
