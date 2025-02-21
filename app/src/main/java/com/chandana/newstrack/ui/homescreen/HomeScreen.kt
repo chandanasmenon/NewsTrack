@@ -27,7 +27,7 @@ import com.chandana.newstrack.ui.theme.NewsAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenRoute() {
+fun HomeScreenRoute(onNavigate: (String) -> Unit) {
     NewsAppTheme {
         Scaffold(topBar = {
             TopAppBar(colors = TopAppBarDefaults.topAppBarColors(
@@ -49,14 +49,14 @@ fun HomeScreenRoute() {
                     .padding(padding)
                     .padding(top = 10.dp, bottom = 4.dp, start = 2.dp, end = 2.dp)
             ) {
-                HomeScreen()
+                HomeScreen(onNavigate)
             }
         })
     }
 }
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onNavigate: (String) -> Unit) {
     Column(
         modifier = Modifier
             .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 4.dp)
@@ -64,7 +64,7 @@ fun HomeScreen() {
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TopHeadlines()
+        TopHeadlines(onNavigate)
         PaginationTopHeadlines()
         OfflineTopHeadlines()
         NewsCategories()
@@ -75,12 +75,12 @@ fun HomeScreen() {
 }
 
 @Composable
-fun TopHeadlines() {
+fun TopHeadlines(onNavigate: (String) -> Unit) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp),
         onClick = {
-
+            onNavigate("topheadline")
         }
     ) {
         ButtonText(text = stringResource(R.string.topheadline_sources))

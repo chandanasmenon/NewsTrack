@@ -55,4 +55,6 @@
     <string name="author">Author : </string>
     <string name="data_text">Data</string>
     <string name="news_image">News Image</string>
+    <string name="back_button_text">Back Button</string>
+    <string name="loading">Loading</string>
 </resources>
