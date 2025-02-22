@@ -11,6 +11,8 @@ import androidx.navigation.navArgument
 import com.chandana.newstrack.R
 import com.chandana.newstrack.ui.categorynews.CategoryNewsRoute
 import com.chandana.newstrack.ui.categorynews.CategoryScreenRoute
+import com.chandana.newstrack.ui.countrynews.CountryNewsRoute
+import com.chandana.newstrack.ui.countrynews.CountryScreenRoute
 import com.chandana.newstrack.ui.homescreen.HomeScreenRoute
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlineRoute
 import com.chandana.newstrack.ui.pagingtopheadlinesources.PaginationTopHeadlineRoute
@@ -24,6 +26,8 @@ sealed class Route(val name: String) {
     object OfflineTopHeadlineSources : Route("offlinetopheadlinesources")
     object NewsCategories : Route("newscategories")
     object CategoryBasedNews : Route("categorybasednews/{category}")
+    object CountrySelection : Route("countryselection")
+    object CountryBasedNews : Route("countrybasednews/{country}")
 }
 
 @Composable
@@ -43,6 +47,7 @@ fun NewsNavHost() {
                     "paginationtopheadline" -> navController.navigate(Route.PaginationTopHeadlineSources.name)
                     "offlinetopheadline" -> navController.navigate(Route.OfflineTopHeadlineSources.name)
                     "newscategories" -> navController.navigate(Route.NewsCategories.name)
+                    "countryselection" -> navController.navigate(Route.CountrySelection.name)
                 }
             }
             )
@@ -97,8 +102,31 @@ fun NewsNavHost() {
             }
         }
 
-    }
+        composable(route = Route.CountrySelection.name) {
+            CountryScreenRoute(onCountry = { country ->
+                navController.navigate("countrybasednews/$country")
+            }, onNavigate = {
+                navController.popBackStack()
+            })
+        }
 
+        composable(
+            route = Route.CountryBasedNews.name, arguments = listOf(
+                navArgument(context.getString(R.string.country_text)) {
+                    type = NavType.StringType
+                })
+        ) { backStackEntry ->
+            val country = backStackEntry.arguments?.getString(stringResource(R.string.country_text))
+            if (country != null) {
+                CountryNewsRoute(country, onNewsClick = {
+                    context.launchCustomTab(it)
+                }, onNavigate = {
+                    navController.popBackStack()
+                })
+            }
+        }
+
+    }
 }
 
 
