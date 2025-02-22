@@ -68,7 +68,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         PaginationTopHeadlines(onNavigate)
         OfflineTopHeadlines(onNavigate)
         NewsCategories(onNavigate)
-        CountrySelection()
+        CountrySelection(onNavigate)
         LanguageSelection()
         SearchNews()
     }
@@ -128,12 +128,12 @@ fun NewsCategories(onNavigate: (String) -> Unit) {
 }
 
 @Composable
-fun CountrySelection() {
+fun CountrySelection(onNavigate: (String) -> Unit) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp),
         onClick = {
-
+            onNavigate("countryselection")
         }
     ) {
         ButtonText(text = stringResource(R.string.country_selection_text))
