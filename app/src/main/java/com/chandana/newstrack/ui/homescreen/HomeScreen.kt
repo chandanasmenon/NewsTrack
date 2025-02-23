@@ -70,7 +70,7 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
         NewsCategories(onNavigate)
         CountrySelection(onNavigate)
         LanguageSelection(onNavigate)
-        SearchNews()
+        SearchNews(onNavigate)
     }
 }
 
@@ -154,11 +154,12 @@ fun LanguageSelection(onNavigate: (String) -> Unit) {
 }
 
 @Composable
-fun SearchNews() {
+fun SearchNews(onNavigate: (String) -> Unit) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp),
         onClick = {
+            onNavigate("searchnews")
 
         }
     ) {
