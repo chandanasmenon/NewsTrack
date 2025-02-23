@@ -18,3 +18,20 @@ fun String.getLanguageName(code: String): String {
 fun String.getCountryName(code: String): String {
     return AppConstant.COUNTRIES.find { it.id == code }?.value ?: "Unknown"
 }
+
+/* Parses a filter string and converts it into a list of key-value pairs.*/
+fun String.getFilterValuesList(filters: String): List<Pair<String, String>> {
+    return filters.split("|").map { filter ->
+        val (key, values) = filter.split(":")
+        key to values
+    }
+}
+
+/* Retrieves the value of a specific filter from a list of key-value filter pairs */
+fun List<Pair<String, String>>.getFilterValue(
+    filterList: List<Pair<String, String>>,
+    filter: String
+): String {
+    val pair = filterList.find { it.first == filter }
+    return pair?.second ?: ""
+}

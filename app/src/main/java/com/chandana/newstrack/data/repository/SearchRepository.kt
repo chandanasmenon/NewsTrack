@@ -1,6 +1,7 @@
 package com.chandana.newstrack.data.repository
 
 import com.chandana.newstrack.data.model.Article
+import com.chandana.newstrack.data.model.Code
 import com.chandana.newstrack.data.remote.NetworkService
 import com.chandana.newstrack.utils.AppConstant
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +32,18 @@ class SearchRepository @Inject constructor(private val networkService: NetworkSe
     fun getFilterData(): Flow<List<String>> {
         return flow {
             emit(AppConstant.FILTERS)
+        }
+    }
+
+    fun getLanguageList(): Flow<List<Code>> {
+        return flow {
+            emit(AppConstant.LANGUAGES)
+        }
+    }
+
+    fun getSortByOptions(): Flow<List<Code>> {
+        return flow {
+            emit(AppConstant.SORT_BY)
         }
     }
 }

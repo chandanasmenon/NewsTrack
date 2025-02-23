@@ -60,4 +60,18 @@
     <string name="category_text">category</string>
     <string name="country_text">country</string>
     <string name="language_name">language</string>
+    <string name="languages_text">Languages</string>
+    <string name="sortby_text">SortBy</string>
+    <string name="search_news_hint_text">Search News...</string>
+    <string name="clear_icon_text">Clear Icon</string>
+    <string name="search_icon_text">Search Icon</string>
+    <string name="default_text">default</string>
+    <string name="show_filters_text">Show filters</string>
+    <string name="reset_filter_text">Reset Filter</string>
+    <string name="no_results_found_text">No results found</string>
+    <string name="published_at_text">Published At :</string>
+    <string name="content_text">Content : </string>
+    <string name="author_text">Author :</string>
+    <string name="query">query</string>
+    <string name="filters">filters</string>
 </resources>
