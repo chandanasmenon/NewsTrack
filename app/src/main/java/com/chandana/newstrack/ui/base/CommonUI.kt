@@ -171,13 +171,13 @@ fun NoCategoryNewsFoundMsg(category: String) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(MaterialTheme.colorScheme.errorContainer),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = stringResource(id = R.string.category_news_empty_display_text, category),
             style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onErrorContainer,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(4.dp)
@@ -191,13 +191,13 @@ fun NoCountryNewsFoundMsg(country: String) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(MaterialTheme.colorScheme.errorContainer),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = stringResource(id = R.string.country_news_empty_display_text, country),
             style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onErrorContainer,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(4.dp)
@@ -211,14 +211,14 @@ fun NoLanguageNewsFoundMsg(language: String) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(MaterialTheme.colorScheme.errorContainer),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
 
     ) {
         Text(
             text = stringResource(id = R.string.language_news_empty_display_text, language),
             style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onErrorContainer,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(4.dp)

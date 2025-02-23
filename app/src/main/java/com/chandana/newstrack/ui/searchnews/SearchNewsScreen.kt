@@ -249,14 +249,15 @@ fun SearchNewsList(newsList: List<Article>, onNewsClick: (url: String) -> Unit) 
     if (newsList.isEmpty()) {
         Box(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = stringResource(R.string.no_results_found_text),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     } else {
