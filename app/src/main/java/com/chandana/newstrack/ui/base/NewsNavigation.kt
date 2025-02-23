@@ -14,6 +14,8 @@ import com.chandana.newstrack.ui.categorynews.CategoryScreenRoute
 import com.chandana.newstrack.ui.countrynews.CountryNewsRoute
 import com.chandana.newstrack.ui.countrynews.CountryScreenRoute
 import com.chandana.newstrack.ui.homescreen.HomeScreenRoute
+import com.chandana.newstrack.ui.languagenews.LanguageNewsRoute
+import com.chandana.newstrack.ui.languagenews.LanguageScreenRoute
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlineRoute
 import com.chandana.newstrack.ui.pagingtopheadlinesources.PaginationTopHeadlineRoute
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesRoute
@@ -28,6 +30,8 @@ sealed class Route(val name: String) {
     object CategoryBasedNews : Route("categorybasednews/{category}")
     object CountrySelection : Route("countryselection")
     object CountryBasedNews : Route("countrybasednews/{country}")
+    object LanguageSelection : Route("languageselection")
+    object LanguageBasedNews : Route("languagebasednews/{language}")
 }
 
 @Composable
@@ -48,6 +52,7 @@ fun NewsNavHost() {
                     "offlinetopheadline" -> navController.navigate(Route.OfflineTopHeadlineSources.name)
                     "newscategories" -> navController.navigate(Route.NewsCategories.name)
                     "countryselection" -> navController.navigate(Route.CountrySelection.name)
+                    "languageselection" -> navController.navigate(Route.LanguageSelection.name)
                 }
             }
             )
@@ -126,9 +131,30 @@ fun NewsNavHost() {
             }
         }
 
+        composable(route = Route.LanguageSelection.name) {
+            LanguageScreenRoute(onLanguage = { language ->
+                navController.navigate("languagebasednews/$language")
+            }, onNavigate = {
+                navController.popBackStack()
+            })
+        }
+
+        composable(
+            route = Route.LanguageBasedNews.name, arguments = listOf(
+                navArgument(context.getString(R.string.language_name)) {
+                    type = NavType.StringType
+                })
+        ) { backStackEntry ->
+            val language =
+                backStackEntry.arguments?.getString(stringResource(R.string.language_name))
+            if (language != null) {
+                LanguageNewsRoute(language, onNewsClick = {
+                    context.launchCustomTab(it)
+                }, onNavigate = {
+                    navController.popBackStack()
+                })
+            }
+        }
+
     }
 }
-
-
-
-

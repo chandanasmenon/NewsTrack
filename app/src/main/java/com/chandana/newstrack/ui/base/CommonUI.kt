@@ -204,3 +204,24 @@ fun NoCountryNewsFoundMsg(country: String) {
         )
     }
 }
+
+@Composable
+fun NoLanguageNewsFoundMsg(language: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(MaterialTheme.colorScheme.errorContainer),
+        contentAlignment = Alignment.Center
+
+    ) {
+        Text(
+            text = stringResource(id = R.string.language_news_empty_display_text, language),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onErrorContainer,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(4.dp)
+        )
+    }
+}
