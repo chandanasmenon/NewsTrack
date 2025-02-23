@@ -9,7 +9,7 @@ object AppConstant {
     const val PAGE_SIZE = 10
     var DEBOUNCE_TIMEOUT = 300L
     const val MIN_SEARCH_CHAR = 3
-    val FILTERS = listOf("Language", "Sort By")
+    val FILTERS = listOf("Languages", "SortBy")
     val SORT_BY = listOf(
         Code("relevancy", "Relevancy"),
         Code("popularity", "Popularity"),

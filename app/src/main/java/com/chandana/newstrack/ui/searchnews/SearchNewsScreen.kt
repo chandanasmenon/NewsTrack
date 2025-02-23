@@ -266,7 +266,7 @@ fun SearchNewsList(newsList: List<Article>, onNewsClick: (url: String) -> Unit) 
             verticalArrangement = Arrangement.spacedBy(4.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(newsList, key = { news -> news }) { news ->
+            items(newsList, key = { news -> news.url.toString() }) { news ->
                 NewsItem(news = news, onNewsClick = onNewsClick)
             }
         }
