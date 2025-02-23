@@ -9,11 +9,12 @@ object AppConstant {
     const val PAGE_SIZE = 10
     var DEBOUNCE_TIMEOUT = 300L
     const val MIN_SEARCH_CHAR = 3
-    const val CATEGORY = "CATEGORY"
-    const val COUNTRY = "COUNTRY"
-    const val LANGUAGE = "LANGUAGE"
-    const val CODE = "CODE"
     val FILTERS = listOf("Language", "Sort By")
+    val SORT_BY = listOf(
+        Code("relevancy", "Relevancy"),
+        Code("popularity", "Popularity"),
+        Code("publishedAt", "PublishedAt")
+    )
     val COUNTRIES = listOf(
         Code("ae", "United Arab Emirates"),
         Code("ar", "Argentina"),

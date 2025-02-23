@@ -3,6 +3,7 @@ package com.chandana.newstrack.ui.searchnews
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chandana.newstrack.data.model.Article
+import com.chandana.newstrack.data.model.Code
 import com.chandana.newstrack.data.repository.SearchRepository
 import com.chandana.newstrack.ui.base.UiState
 import com.chandana.newstrack.utils.AppConstant
@@ -34,6 +35,12 @@ class SearchNewsViewModel @Inject constructor(
     private val _uiStateFilterData = MutableStateFlow<UiState<List<String>>>(UiState.Loading)
     val uiStateFilterData: StateFlow<UiState<List<String>>> = _uiStateFilterData
 
+    private val _uiStateSortBy = MutableStateFlow<UiState<List<Code>>>(UiState.Loading)
+    val uiStateSortBy: StateFlow<UiState<List<Code>>> = _uiStateSortBy
+
+    private val _uiStateLanguage = MutableStateFlow<UiState<List<Code>>>(UiState.Loading)
+    val uiStateLanguage: StateFlow<UiState<List<Code>>> = _uiStateLanguage
+
     init {
         getSearchNewsList()
     }
@@ -63,7 +70,36 @@ class SearchNewsViewModel @Inject constructor(
                 }
                 .flowOn(dispatcherProvider.io)
                 .collect {
-                    _uiStateSearchNews.value = UiState.Success(it)
+                    val finalList = mutableListOf<Article>()
+                    for (item in it) {
+                        if (item.title != "[Removed]") {
+                            finalList.add(item)
+                        }
+                    }
+                    _uiStateSearchNews.value = UiState.Success(finalList)
+                }
+        }
+    }
+
+    fun getFilterSearchNewsList(searchQuery: String, language: String, sortBy: String) {
+        viewModelScope.launch(dispatcherProvider.main) {
+            repository.getFilterSearchResults(
+                q = searchQuery,
+                language = language,
+                sortBy = sortBy
+            )
+                .flowOn(dispatcherProvider.io)
+                .catch {
+                    _uiStateFilterSearchNews.value = UiState.Error(it.message.toString())
+                }
+                .collect {
+                    val finalList = mutableListOf<Article>()
+                    for (item in it) {
+                        if (item.title != "[Removed]") {
+                            finalList.add(item)
+                        }
+                    }
+                    _uiStateFilterSearchNews.value = UiState.Success(finalList)
                 }
         }
     }
@@ -81,15 +117,26 @@ class SearchNewsViewModel @Inject constructor(
         }
     }
 
-    fun getFilterSearchNewsList(q: String, language: String, sortBy: String) {
+    fun getSortByOptions() {
         viewModelScope.launch(dispatcherProvider.main) {
-            repository.getFilterSearchResults(q = q, language = language, sortBy = sortBy)
+            repository.getSortByOptions()
                 .flowOn(dispatcherProvider.io)
                 .catch {
-                    _uiStateFilterSearchNews.value = UiState.Error(it.message.toString())
+                    _uiStateSortBy.value = UiState.Error(it.message.toString())
                 }
                 .collect {
-                    _uiStateFilterSearchNews.value = UiState.Success(it)
+                    _uiStateSortBy.value = UiState.Success(it)
+                }
+        }
+    }
+
+    fun getLanguagesList() {
+        viewModelScope.launch(dispatcherProvider.main) {
+            repository.getLanguageList()
+                .flowOn(dispatcherProvider.io)
+                .catch { _uiStateLanguage.value = UiState.Error(it.message.toString()) }
+                .collect {
+                    _uiStateLanguage.value = UiState.Success(it)
                 }
         }
     }

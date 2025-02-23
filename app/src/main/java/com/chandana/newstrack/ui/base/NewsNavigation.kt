@@ -18,6 +18,8 @@ import com.chandana.newstrack.ui.languagenews.LanguageNewsRoute
 import com.chandana.newstrack.ui.languagenews.LanguageScreenRoute
 import com.chandana.newstrack.ui.offlinetopheadlines.OfflineTopHeadlineRoute
 import com.chandana.newstrack.ui.pagingtopheadlinesources.PaginationTopHeadlineRoute
+import com.chandana.newstrack.ui.searchnews.FilterSearchRoute
+import com.chandana.newstrack.ui.searchnews.SearchScreenRoute
 import com.chandana.newstrack.ui.topheadlinesources.TopHeadlineSourcesRoute
 import com.chandana.newstrack.utils.extensions.launchCustomTab
 
@@ -32,6 +34,8 @@ sealed class Route(val name: String) {
     object CountryBasedNews : Route("countrybasednews/{country}")
     object LanguageSelection : Route("languageselection")
     object LanguageBasedNews : Route("languagebasednews/{language}")
+    object SearchNews : Route("searchnews/{query}/{filters}")
+    object SearchFilter : Route("searchfilter/{query}/{filters}")
 }
 
 @Composable
@@ -53,6 +57,7 @@ fun NewsNavHost() {
                     "newscategories" -> navController.navigate(Route.NewsCategories.name)
                     "countryselection" -> navController.navigate(Route.CountrySelection.name)
                     "languageselection" -> navController.navigate(Route.LanguageSelection.name)
+                    "searchnews" -> navController.navigate("searchnews/default/default")
                 }
             }
             )
@@ -156,5 +161,67 @@ fun NewsNavHost() {
             }
         }
 
+        composable(
+            route = Route.SearchNews.name, arguments = listOf(
+                navArgument(context.getString(R.string.query)) {
+                    type = NavType.StringType
+                    defaultValue = ""
+                },
+                navArgument(context.getString(R.string.filters)) {
+                    type = NavType.StringType
+                    defaultValue = ""
+                }
+            )
+        ) { backStackEntry ->
+            val query = backStackEntry.arguments?.getString(stringResource(id = R.string.query))
+            val filters = backStackEntry.arguments?.getString(stringResource(R.string.filters))
+
+            val actualQuery = if (query == stringResource(R.string.default_text)) "" else query
+            val actualFilters =
+                if (filters == stringResource(R.string.default_text)) "" else filters
+
+            if (actualQuery != null && actualFilters != null) {
+                SearchScreenRoute(actualQuery, actualFilters, onNewsClick = { url ->
+                    context.launchCustomTab(url)
+                }, onNavigateBack = {
+                    navController.popBackStack()
+                }, addFilters = { query, filters ->
+                    navController.navigate("searchfilter/$query/$filters")
+                }
+                )
+            }
+        }
+
+        composable(
+            route = Route.SearchFilter.name, arguments = listOf(
+                navArgument(context.getString(R.string.query)) {
+                    type = NavType.StringType
+                    defaultValue = ""
+                },
+                navArgument(context.getString(R.string.filters)) {
+                    type = NavType.StringType
+                    defaultValue = ""
+                })
+        ) { backStackEntry ->
+            val query = backStackEntry.arguments?.getString(stringResource(R.string.query))
+            val filters = backStackEntry.arguments?.getString(stringResource(R.string.filters))
+            val actualQuery = if (query == stringResource(R.string.default_text)) "" else query
+            val actualFilters =
+                if (filters == stringResource(R.string.default_text)) "" else filters
+
+            if (actualQuery != null && actualFilters != null) {
+                FilterSearchRoute(actualQuery, actualFilters, onNavigate = { query, filters ->
+                    navController.popBackStack()
+                    navController.popBackStack()
+                    navController.navigate("searchnews/$query/$filters")
+                },
+                    applyFilters = { query, filters ->
+                        navController.popBackStack()
+                        navController.popBackStack()
+                        navController.navigate("searchnews/$query/$filters")
+                    })
+            }
+        }
     }
+
 }
