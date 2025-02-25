@@ -162,9 +162,10 @@ class SearchActivity : AppCompatActivity() {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
             viewModel.uiStateSearchNews.collect {
                 when (it) {
-                    UiState.Loading -> {
-                        binding.progressBarSearch.visibility = View.VISIBLE
+                    is UiState.Loading -> {
                         binding.searchRecyclerView.visibility = View.GONE
+                        binding.errorMsgTV.visibility = View.GONE
+                        binding.progressBarSearch.visibility = View.VISIBLE
                     }
 
                     is UiState.Error -> {
@@ -175,6 +176,7 @@ class SearchActivity : AppCompatActivity() {
 
                     is UiState.Success -> {
                         binding.progressBarSearch.visibility = View.GONE
+                        binding.errorMsgTV.visibility = View.GONE
                         binding.searchRecyclerView.visibility = View.VISIBLE
                         val finalList = mutableListOf<Article>()
                         for (item in it.data) {
@@ -182,8 +184,17 @@ class SearchActivity : AppCompatActivity() {
                                 finalList.add(item)
                             }
                         }
-                        setUpSearchData(finalList)
+                        if (finalList.isNotEmpty()) {
+                            setUpSearchData(finalList)
+                        } else if (searchQuery.isNotEmpty() && searchQuery.length >= AppConstant.MIN_SEARCH_CHAR) {
+                            binding.errorMsgTV.visibility = View.VISIBLE
+                            binding.errorMsgTV.text = getString(R.string.no_results_found_text)
+                            binding.searchRecyclerView.visibility = View.GONE
+                        } else {
+                            binding.searchRecyclerView.visibility = View.GONE
+                        }
                     }
+
                 }
             }
         }
@@ -198,9 +209,10 @@ class SearchActivity : AppCompatActivity() {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
             viewModel.uiStateFilterSearchNews.collect {
                 when (it) {
-                    UiState.Loading -> {
-                        binding.progressBarSearch.visibility = View.VISIBLE
+                    is UiState.Loading -> {
                         binding.searchRecyclerView.visibility = View.GONE
+                        binding.errorMsgTV.visibility = View.GONE
+                        binding.progressBarSearch.visibility = View.VISIBLE
                     }
 
                     is UiState.Error -> {
@@ -211,6 +223,7 @@ class SearchActivity : AppCompatActivity() {
 
                     is UiState.Success -> {
                         binding.progressBarSearch.visibility = View.GONE
+                        binding.errorMsgTV.visibility = View.GONE
                         binding.searchRecyclerView.visibility = View.VISIBLE
                         val finalList = mutableListOf<Article>()
                         for (item in it.data) {
@@ -218,7 +231,15 @@ class SearchActivity : AppCompatActivity() {
                                 finalList.add(item)
                             }
                         }
-                        setUpSearchData(finalList)
+                        if (finalList.isNotEmpty()) {
+                            setUpSearchData(finalList)
+                        } else if (searchQuery.isNotEmpty() && searchQuery.length >= AppConstant.MIN_SEARCH_CHAR) {
+                            binding.errorMsgTV.visibility = View.VISIBLE
+                            binding.errorMsgTV.text = getString(R.string.no_results_found_text)
+                            binding.searchRecyclerView.visibility = View.GONE
+                        } else {
+                            binding.searchRecyclerView.visibility = View.GONE
+                        }
                     }
                 }
             }

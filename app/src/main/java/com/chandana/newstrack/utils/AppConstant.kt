@@ -3,7 +3,7 @@ package com.chandana.newstrack.utils
 import com.chandana.newstrack.data.model.Code
 
 object AppConstant {
-    const val API_KEY = "34f03cf8a221405aa17278a04e8e98a4"
+    const val API_KEY = "274288b044a047c598efb38aac00aeff"
     const val USER_AGENT = "abc"
     const val INITIAL_PAGE = 1
     const val PAGE_SIZE = 10

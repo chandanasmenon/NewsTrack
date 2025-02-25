@@ -55,4 +55,5 @@
     <string name="author">Author : </string>
     <string name="data_text">Data</string>
     <string name="news_image">News Image</string>
+    <string name="no_results_found_text">No Results found</string>
 </resources>

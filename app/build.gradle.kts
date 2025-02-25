@@ -40,40 +40,39 @@ android {
 }
 
 dependencies {
+
+    // Core Android Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    // Constraint Layout
+    // UI Libraries
     implementation(libs.androidx.constraintlayout)
-
-    // RecyclerView
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.browser)
 
-    // Glide
+    // Image Loading
     implementation(libs.glide)
 
-    // Retrofit
+    // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
 
+    // Lifecycle and ViewModel
     implementation(libs.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // Dagger
+    // Dependency Injection
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
-    implementation(libs.androidx.browser)
-    implementation(libs.androidx.activity)
-
-    // Room
+    // Room Database
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
 
-    // Paging Library
+    // Paging
     implementation(libs.androidx.paging.runtime.ktx)
 
     // Unit Testing
@@ -88,4 +87,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.jetbrains.kotlinx.coroutines.test)
+
 }

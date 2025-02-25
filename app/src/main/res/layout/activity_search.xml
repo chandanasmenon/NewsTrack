@@ -59,9 +59,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:paddingBottom="6dp"
+        android:paddingBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/openBottomSheetButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/materialCardView" />
 
@@ -87,12 +88,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_drawable"
         android:fontFamily="sans-serif-medium"
+        android:paddingBottom="10dp"
         android:text="@string/add_filter"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
